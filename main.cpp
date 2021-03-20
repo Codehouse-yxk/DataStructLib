@@ -31,26 +31,8 @@
 using namespace std;
 using namespace DataStLib;
 
-void josephus(int n, int s, int m)
-{
-	CircleList<int> cl;
-	for(int i=1; i<=n; i++)
-	{
-		cl.insert(i);
-	}
-	cl.move(s-1, m-1);
-	while( cl.length() > 0 )
-	{
-		cl.next();
-
-		cout << cl.current() << endl;
-
-        cl.remove(cl.find(cl.current()));
-	}
-}
-
 /*
-    栈实现队列(时间复杂度较高)
+    栈实现队列
 */
 
 template <typename T>
@@ -201,27 +183,47 @@ public:
 };
 
 
-class Test
-{
-public:
-    Test()
-    {
-        cout << "Test()" << endl;
-    }
-    ~Test()
-    {
-        cout << "~Test()" << endl;
-    }
-};
-
 int main()
 {
-    int arr[6] = {21,25,49,25,16,8};
+    /*
+                A
+            B  |   C
+            E   F|   M   N
+        X   Y
+        前序：ABEXYFCMN
+        中序：XEYBFAMCN
+        后续：XYEFBMNCA
+    */
+    BTree<char> btree;
+    BTreeNode<char>* bn = NULL;     //根节点
 
-    Sort::Shell(arr, 6);
+    btree.insert('A',NULL);
 
-    for(int i=0; i<6; i++)
-        cout << arr[i] << endl;
+    bn = btree.find('A');
+    btree.insert('B', bn);
+    btree.insert('C', bn);
+
+    bn = btree.find('B');
+    btree.insert('E', bn);
+    btree.insert('F', bn);
+
+    bn = btree.find('C');
+    btree.insert('M', bn);
+    btree.insert('N', bn);
+
+    bn = btree.find('E');
+    btree.insert('X', bn);
+    btree.insert('Y', bn);
+
+
+    SharedPointer< Array<char> > tr = btree.traversal(LeverOrder);
+
+    cout << "===============层次遍历================" << endl;
+    for(int i=0; i<(*tr).length(); i++)
+    {
+        cout << (*tr)[i];
+    }
+    cout << endl;
 
     return 0;
 }
