@@ -1,38 +1,38 @@
 #include <iostream>
-#include "SmartPointer/SmartPointer.h"
-#include "Exception/Exception.h"
-#include "Object/Object.h"
-#include "List/List.h"
-#include "List/SeqList.h"
-#include "List/StaticList.h"
-#include "List/DynamicList.h"
-#include "List/LinkList.h"
-#include "Array/StaticArray.h"
-#include "Array/DynamicArray.h"
-#include "List/StaticLinkList.h"
-#include "SmartPointer/SharedPointer.h"
-#include "List/CircleList.h"
-#include "List/DuaLinkList.h"
-#include "List/DuaStaticLinkList.h"
-#include "List/DuaCircleLinkList.h"
-#include "List/LinuxList.h"
-#include "Stack/StaticStack.h"
-#include "Queue/StaticQueue.h"
-#include "Queue/LinkQueue.h"
-#include "Stack/LinkStack.h"
-#include "String/String.h"
-#include "Sort/Sort.h"
-#include "Tree/GTreeNode.h"
-#include "Tree/GTree.h"
-#include "Tree/BTreeNode.h"
-#include "Tree/BTree.h"
+#include "SmartPointer.h"
+#include "Exception.h"
+#include "Object.h"
+#include "List.h"
+#include "SeqList.h"
+#include "StaticList.h"
+#include "DynamicList.h"
+#include "LinkList.h"
+#include "StaticArray.h"
+#include "DynamicArray.h"
+#include "StaticLinkList.h"
+#include "SharedPointer.h"
+#include "CircleList.h"
+#include "DuaLinkList.h"
+#include "DuaStaticLinkList.h"
+#include "DuaCircleLinkList.h"
+#include "LinuxList.h"
+#include "StaticStack.h"
+#include "StaticQueue.h"
+#include "LinkQueue.h"
+#include "LinkStack.h"
+#include "String.h"
+#include "Sort.h"
+#include "GTreeNode.h"
+#include "GTree.h"
+#include "BTreeNode.h"
+#include "BTree.h"
 #include <cstring>
 
 using namespace std;
 using namespace DataStLib;
 
 /*
-    Õ»ÊµÏÖ¶ÓÁĞ
+    æ ˆå®ç°é˜Ÿåˆ—
 */
 
 template <typename T>
@@ -41,7 +41,7 @@ class StacktoQueue : public Queue<T>
 protected:
     mutable LinkStack<T> m_stack_in;
     mutable LinkStack<T> m_stack_out;
-    void move()const    //O(n)    //constº¯ÊıÖĞÖ»ÄÜµ÷ÓÃconstº¯Êı
+    void move()const    //O(n)    //constå‡½æ•°ä¸­åªèƒ½è°ƒç”¨constå‡½æ•°
     {
         if( m_stack_out.size() == 0 )
         {
@@ -103,7 +103,7 @@ public:
 
 
 /*
-    Ê¹ÓÃ¶ÓÁĞÊµÏÖÕ»
+    ä½¿ç”¨é˜Ÿåˆ—å®ç°æ ˆ
 */
 
 template <typename T>
@@ -115,7 +115,7 @@ protected:
     LinkQueue<T>* m_pIn;
     LinkQueue<T>* m_pOut;
 
-    void move()const //½«½ø¶ÓÁĞÖĞµÄÔªËØ×ªÒÆµ½³ö¶ÓÁĞ      //O(n)
+    void move()const //å°†è¿›é˜Ÿåˆ—ä¸­çš„å…ƒç´ è½¬ç§»åˆ°å‡ºé˜Ÿåˆ—      //O(n)
     {
         int n = m_pIn->length()-1;
         for(int i=0; i<n; i++)
@@ -124,7 +124,7 @@ protected:
             m_pIn->remove();
         }
     }
-    void swap() //½»»»½ø³ö¶ÓÁĞ½ÇÉ«     //O(1)
+    void swap() //äº¤æ¢è¿›å‡ºé˜Ÿåˆ—è§’è‰²     //O(1)
     {
         LinkQueue<T>* temp = NULL;
 
@@ -190,12 +190,12 @@ int main()
             B  |   C
             E   F|   M   N
         X   Y
-        Ç°Ğò£ºABEXYFCMN
-        ÖĞĞò£ºXEYBFAMCN
-        ºóĞø£ºXYEFBMNCA
+        å‰åºï¼šABEXYFCMN
+        ä¸­åºï¼šXEYBFAMCN
+        åç»­ï¼šXYEFBMNCA
     */
     BTree<char> btree;
-    BTreeNode<char>* bn = NULL;     //¸ù½Úµã
+    BTreeNode<char>* bn = NULL;     //æ ¹èŠ‚ç‚¹
 
     btree.insert('A',NULL);
 
@@ -218,7 +218,7 @@ int main()
 
     SharedPointer< Array<char> > tr = btree.traversal(LeverOrder);
 
-    cout << "===============²ã´Î±éÀú================" << endl;
+    cout << "===============å±‚æ¬¡éå†================" << endl;
     for(int i=0; i<(*tr).length(); i++)
     {
         cout << (*tr)[i];
