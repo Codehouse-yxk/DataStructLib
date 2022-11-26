@@ -34,10 +34,9 @@ namespace DataStLib {
         virtual ~Exception() = 0;
     };
 
-    class ArithmeticException : public Exception        //计算异常
-    {
+    class ArithmeticException : public Exception {  //计算异常
     public:
-        ArithmeticException() {}//:Exception(0)   {}
+        ArithmeticException() {} //: Exception(0)   {}
 
         ArithmeticException(const char *message) : Exception(message) {}
 
@@ -53,10 +52,9 @@ namespace DataStLib {
         }
     };
 
-    class NullPointerException : public Exception        //空指针异常
-    {
+    class NullPointerException : public Exception { //空指针异常
     public:
-        NullPointerException() {}//:Exception(0)   {}
+        NullPointerException() {} //: Exception(0)   {}
 
         NullPointerException(const char *message) : Exception(message) {}
 
@@ -72,10 +70,9 @@ namespace DataStLib {
         }
     };
 
-    class IndexOutOfBoundsException : public Exception        //越界异常
-    {
+    class IndexOutOfBoundsException : public Exception {    //越界异常
     public:
-        IndexOutOfBoundsException() {}//:Exception(0)   {}
+        IndexOutOfBoundsException() {} //: Exception(0)   {}
 
         IndexOutOfBoundsException(const char *message) : Exception(message) {}
 
@@ -91,10 +88,9 @@ namespace DataStLib {
         }
     };
 
-    class NoEnoughMemoryException : public Exception        //内存不足异常
-    {
+    class NoEnoughMemoryException : public Exception {  //内存不足异常
     public:
-        NoEnoughMemoryException() {}//:Exception(0)   {}
+        NoEnoughMemoryException() {} //: Exception(0)   {}
 
         NoEnoughMemoryException(const char *message) : Exception(message) {}
 
@@ -110,10 +106,9 @@ namespace DataStLib {
         }
     };
 
-    class InvalidParameterException : public Exception        //参数错误异常
-    {
+    class InvalidParameterException : public Exception {    //参数错误异常
     public:
-        InvalidParameterException() {}//:Exception(0)   {}
+        InvalidParameterException() {} //: Exception(0)   {}
 
         InvalidParameterException(const char *message) : Exception(message) {}
 
@@ -129,10 +124,9 @@ namespace DataStLib {
         }
     };
 
-    class InvalidOperationException : public Exception        //函数状态异常
-    {
+    class InvalidOperationException : public Exception {    //函数状态异常
     public:
-        InvalidOperationException() {}//:Exception(0)   {}
+        InvalidOperationException() {} //: Exception(0)   {}
 
         InvalidOperationException(const char *message) : Exception(message) {}
 
@@ -148,10 +142,8 @@ namespace DataStLib {
         }
     };
 
-
     void ExceptionTest(void);
 
 }
-
 
 #endif // EXCEPTION_H

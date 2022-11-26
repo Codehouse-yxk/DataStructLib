@@ -3,29 +3,28 @@
 
 #include "TreeNode.h"
 
-namespace DataStLib
-{
-template<typename T>
-class BTreeNode : public TreeNode<T>
-{
-public:
-    BTreeNode<T>* left;
-    BTreeNode<T>* right;
-
-    static BTreeNode<T>* NewNode()  //工厂模式
-    {
-        BTreeNode<T>* ret = new BTreeNode<T>();
-        if(ret != NULL)
-        {
-            ret->m_flag = true;
+namespace DataStLib {
+    template<typename T>
+    class BTreeNode : public TreeNode<T> {
+    public:
+        BTreeNode() {
+            left = NULL;
+            right = NULL;
         }
-        return ret;
-    }
-};
+
+        static BTreeNode<T> *NewNode() //工厂模式
+        {
+            BTreeNode<T> *ret = new BTreeNode<T>();
+            if (ret != NULL) {
+                ret->m_flag = true;
+            }
+            return ret;
+        }
+
+    public:
+        BTreeNode<T> *left;
+        BTreeNode<T> *right;
+    };
 }
 
-
-
-
 #endif // BTREENODE
-

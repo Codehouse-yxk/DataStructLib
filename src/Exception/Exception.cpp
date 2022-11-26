@@ -76,21 +76,17 @@ namespace DataStLib {
     void ExceptionTest(void) {
         try {
             //throw Exception("test",__FILE__,__LINE__);
-            THROW_EXCEPTION(NullPointerException, "Test");  //不能使用NULL，可以使用“NULL” ，因为不能对NULL进行解引用
+            THROW_EXCEPTION(NullPointerException, "null");
             //throw Exception(__FILE__,__LINE__);
-        }
-
-        catch (const ArithmeticException &e) {
+        } catch (const ArithmeticException &e) {
             cout << " catch(const ArithmeticException& e)" << endl;
             cout << e.message() << endl;
             cout << e.location() << endl;
-        }
-        catch (const NullPointerException &e) {
+        } catch (const NullPointerException &e) {
             cout << " catch(const NullPointerException& e)" << endl;
             cout << e.message() << endl;
             cout << e.location() << endl;
-        }
-        catch (const Exception &e) {
+        } catch (const Exception &e) {
             cout << " catch(const Exception& e)" << endl;
             cout << e.message() << endl;
             cout << e.location() << endl;

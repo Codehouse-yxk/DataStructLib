@@ -1,32 +1,32 @@
-#include <iostream>
-#include "SmartPointer.h"
-#include "Exception.h"
-#include "Object.h"
-#include "List.h"
-#include "SeqList.h"
-#include "StaticList.h"
-#include "DynamicList.h"
-#include "LinkList.h"
-#include "StaticArray.h"
-#include "DynamicArray.h"
-#include "StaticLinkList.h"
-#include "SharedPointer.h"
+#include "BTree.h"
+#include "BTreeNode.h"
 #include "CircleList.h"
+#include "DuaCircleLinkList.h"
 #include "DuaLinkList.h"
 #include "DuaStaticLinkList.h"
-#include "DuaCircleLinkList.h"
-#include "LinuxList.h"
-#include "StaticStack.h"
-#include "StaticQueue.h"
+#include "DynamicArray.h"
+#include "DynamicList.h"
+#include "Exception.h"
+#include "GTree.h"
+#include "GTreeNode.h"
+#include "LinkList.h"
 #include "LinkQueue.h"
 #include "LinkStack.h"
-#include "String.h"
+#include "LinuxList.h"
+#include "List.h"
+#include "Object.h"
+#include "SeqList.h"
+#include "SharedPointer.h"
+#include "SmartPointer.h"
 #include "Sort.h"
-#include "GTreeNode.h"
-#include "GTree.h"
-#include "BTreeNode.h"
-#include "BTree.h"
+#include "StaticArray.h"
+#include "StaticLinkList.h"
+#include "StaticList.h"
+#include "StaticQueue.h"
+#include "StaticStack.h"
+#include "String.h"
 #include <cstring>
+#include <iostream>
 
 using namespace std;
 using namespace DataStLib;
@@ -35,156 +35,149 @@ using namespace DataStLib;
     栈实现队列
 */
 
-template <typename T>
-class StacktoQueue : public Queue<T>
-{
+template<typename T>
+class StacktoQueue : public Queue<T> {
 protected:
     mutable LinkStack<T> m_stack_in;
     mutable LinkStack<T> m_stack_out;
-    void move()const    //O(n)    //const函数中只能调用const函数
+
+    void move() const // O(n)    //const函数中只能调用const函数
     {
-        if( m_stack_out.size() == 0 )
-        {
-            while( m_stack_in.size() > 0 )
-            {
+        if (m_stack_out.size() == 0) {
+            while (m_stack_in.size() > 0) {
                 m_stack_out.push(m_stack_in.top());
                 m_stack_in.pop();
             }
         }
     }
-public:
-    StacktoQueue()       //O(1)
-    {
 
+public:
+    StacktoQueue() // O(1)
+    {
     }
-    void add(const T& e)         //O(1)
+
+    void add(const T &e) // O(1)
     {
         m_stack_in.push(e);
     }
-    void remove()        //O(n)
+
+    void remove() // O(n)
     {
         move();
-        if( m_stack_out.size() > 0)
-        {
+        if (m_stack_out.size() > 0) {
             m_stack_out.pop();
-        }
-        else
-        {
-            THROW_EXCEPTION(InvalidOperationException," The StacktoQueue no element... ");
+        } else {
+            THROW_EXCEPTION(InvalidOperationException, " The StacktoQueue no element... ");
         }
     }
-    T front()const       //O(n)
+
+    T front() const // O(n)
     {
         move();
 
-        if( m_stack_out.size() > 0)
-        {
+        if (m_stack_out.size() > 0) {
             return m_stack_out.top();
-        }
-        else
-        {
-            THROW_EXCEPTION(InvalidOperationException," The StacktoQueue no element... ");
+        } else {
+            THROW_EXCEPTION(InvalidOperationException, " The StacktoQueue no element... ");
         }
     }
-    void clear()         //O(n)
+
+    void clear() // O(n)
     {
         m_stack_in.clear();
         m_stack_out.clear();
     }
-    int length()const        //O(1)
+
+    int length() const // O(1)
     {
-        return ( m_stack_in.size()+m_stack_out.size() );
+        return (m_stack_in.size() + m_stack_out.size());
     }
-    ~StacktoQueue()        //O(1)
+
+    ~StacktoQueue() // O(1)
     {
         clear();
     }
 };
 
-
 /*
     使用队列实现栈
 */
 
-template <typename T>
-class QueuetoStack : public Stack<T>
-{
+template<typename T>
+class QueuetoStack : public Stack<T> {
 protected:
     LinkQueue<T> m_queue_1;
     LinkQueue<T> m_queue_2;
-    LinkQueue<T>* m_pIn;
-    LinkQueue<T>* m_pOut;
+    LinkQueue<T> *m_pIn;
+    LinkQueue<T> *m_pOut;
 
-    void move()const //将进队列中的元素转移到出队列      //O(n)
+    void move() const //将进队列中的元素转移到出队列      //O(n)
     {
-        int n = m_pIn->length()-1;
-        for(int i=0; i<n; i++)
-        {
+        int n = m_pIn->length() - 1;
+        for (int i = 0; i < n; i++) {
             m_pOut->add(m_pIn->front());
             m_pIn->remove();
         }
     }
+
     void swap() //交换进出队列角色     //O(1)
     {
-        LinkQueue<T>* temp = NULL;
+        LinkQueue<T> *temp = NULL;
 
         temp = m_pIn;
         m_pIn = m_pOut;
         m_pOut = temp;
     }
+
 public:
-    QueuetoStack()     //O(1)
+    QueuetoStack() // O(1)
     {
         m_pIn = &m_queue_1;
         m_pOut = &m_queue_2;
     }
-    void push(const T& e)   //O(1)
+
+    void push(const T &e) // O(1)
     {
         m_pIn->add(e);
     }
-    void pop()     //O(n)
+
+    void pop() // O(n)
     {
-        if( m_pIn->length() > 0 )
-        {
+        if (m_pIn->length() > 0) {
             move();
             m_pIn->remove();
             swap();
-        }
-        else
-        {
-            THROW_EXCEPTION(InvalidOperationException," The QueuetoStack no element... ");
+        } else {
+            THROW_EXCEPTION(InvalidOperationException, " The QueuetoStack no element... ");
         }
     }
-    T top()const       //O(n)
+
+    T top() const // O(n)
     {
-        if( m_pIn->length() > 0 )
-        {
+        if (m_pIn->length() > 0) {
             move();
             return m_pIn->front();
-        }
-        else
-        {
-            THROW_EXCEPTION(InvalidOperationException," The QueuetoStack no element... ");
+        } else {
+            THROW_EXCEPTION(InvalidOperationException, " The QueuetoStack no element... ");
         }
     }
-    void clear()       //O(n)
+
+    void clear() // O(n)
     {
         m_pIn->clear();
         m_pOut->clear();
     }
-    int size()const     //O(1)
-    {
-        return ( m_pIn->length() + m_pOut->length() );
-    }
-    ~QueuetoStack()
-    {
 
+    int size() const // O(1)
+    {
+        return (m_pIn->length() + m_pOut->length());
+    }
+
+    ~QueuetoStack() {
     }
 };
 
-
-int main()
-{
+int main() {
     /*
                 A
             B  |   C
@@ -195,9 +188,9 @@ int main()
         后续：XYEFBMNCA
     */
     BTree<char> btree;
-    BTreeNode<char>* bn = NULL;     //根节点
+    TreeNode<char> *bn = NULL; //根节点
 
-    btree.insert('A',NULL);
+    btree.insert('A', NULL);
 
     bn = btree.find('A');
     btree.insert('B', bn);
@@ -215,16 +208,21 @@ int main()
     btree.insert('X', bn);
     btree.insert('Y', bn);
 
-
-    SharedPointer< Array<char> > tr = btree.traversal(LeverOrder);
+    SharedPointer<Array<char>> tr = btree.traversal(PreOrder);
 
     cout << "===============层次遍历================" << endl;
-    for(int i=0; i<(*tr).length(); i++)
-    {
+    for (int i = 0; i < (*tr).length(); i++) {
         cout << (*tr)[i];
+    }
+    cout << endl;
+
+    cout << "===============序列化================" << endl;
+    auto pp = btree.thread(PreOrder);
+    while (pp != NULL){
+        cout << pp->value;
+        pp = pp->right;
     }
     cout << endl;
 
     return 0;
 }
-
