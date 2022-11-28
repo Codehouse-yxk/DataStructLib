@@ -1,32 +1,4 @@
-#include "BTree.h"
-#include "BTreeNode.h"
-#include "CircleList.h"
-#include "DuaCircleLinkList.h"
-#include "DuaLinkList.h"
-#include "DuaStaticLinkList.h"
-#include "DynamicArray.h"
-#include "DynamicList.h"
-#include "Exception.h"
-#include "GTree.h"
-#include "GTreeNode.h"
-#include "LinkList.h"
-#include "LinkQueue.h"
-#include "LinkStack.h"
-#include "LinuxList.h"
-#include "List.h"
-#include "Object.h"
-#include "SeqList.h"
-#include "SharedPointer.h"
-#include "SmartPointer.h"
-#include "Sort.h"
-#include "StaticArray.h"
-#include "StaticLinkList.h"
-#include "StaticList.h"
-#include "StaticQueue.h"
-#include "StaticStack.h"
-#include "String.h"
-#include <cstring>
-#include <iostream>
+#include "test.h"
 
 using namespace std;
 using namespace DataStLib;
@@ -178,51 +150,13 @@ public:
 };
 
 int main() {
-    /*
-                A
-            B  |   C
-            E   F|   M   N
-        X   Y
-        前序：ABEXYFCMN
-        中序：XEYBFAMCN
-        后续：XYEFBMNCA
-    */
-    BTree<char> btree;
-    TreeNode<char> *bn = NULL; //根节点
 
-    btree.insert('A', NULL);
-
-    bn = btree.find('A');
-    btree.insert('B', bn);
-    btree.insert('C', bn);
-
-    bn = btree.find('B');
-    btree.insert('E', bn);
-    btree.insert('F', bn);
-
-    bn = btree.find('C');
-    btree.insert('M', bn);
-    btree.insert('N', bn);
-
-    bn = btree.find('E');
-    btree.insert('X', bn);
-    btree.insert('Y', bn);
-
-    SharedPointer<Array<char>> tr = btree.traversal(PreOrder);
-
-    cout << "===============层次遍历================" << endl;
-    for (int i = 0; i < (*tr).length(); i++) {
-        cout << (*tr)[i];
+    try {
+//        Test::BTreeTest();
+        Test::MatrixGraphTest();
+    } catch (Exception &e) {
+        cout << "catch a exception info: " << e.message() << " at " << e.location() << endl;
     }
-    cout << endl;
-
-    cout << "===============序列化================" << endl;
-    auto pp = btree.thread(PreOrder);
-    while (pp != NULL){
-        cout << pp->value;
-        pp = pp->right;
-    }
-    cout << endl;
 
     return 0;
 }

@@ -12,7 +12,7 @@ namespace DataStLib {
         TreeNode(const TreeNode<T> &) = default; //将拷贝构造和赋值设置为保护，禁止拷贝操作
         TreeNode<T> &operator=(const TreeNode<T> &) = default;
 
-        void *operator new(size_t size) noexcept {
+        void *operator new(size_t size) throw() {
             return Object::operator new(size);
         }
 

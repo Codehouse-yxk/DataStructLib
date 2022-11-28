@@ -116,7 +116,7 @@ namespace DataStLib {
                 }
                 ret->m_root = node; //作为子树返回
             } else {
-                THROW_EXCEPTION(NoEnoughMemoryException, "No memory to creat new tree");
+                THROW_EXCEPTION(NoEnoughMemoryException, "No memory to create new tree");
             }
         }
 
@@ -234,7 +234,7 @@ namespace DataStLib {
                         ret->right->parent = ret;
                     }
                 } else {
-                    THROW_EXCEPTION(NoEnoughMemoryException, "No enough memory to creat node...");
+                    THROW_EXCEPTION(NoEnoughMemoryException, "No enough memory to create node...");
                 }
             }
             return ret;
@@ -274,7 +274,7 @@ namespace DataStLib {
                         ret->right->parent = ret;
                     }
                 } else {
-                    THROW_EXCEPTION(NoEnoughMemoryException, "No enough memory to creat node...");
+                    THROW_EXCEPTION(NoEnoughMemoryException, "No enough memory to create node...");
                 }
             }
             return ret;
@@ -360,15 +360,15 @@ namespace DataStLib {
         }
 
     public:
-        bool insert(TreeNode<T> *node) override {
+        bool insert(TreeNode<T> *node) {
             return insert(node, ANY);
         }
 
-        bool insert(const T &value, TreeNode<T> *parrent) override {
+        bool insert(const T &value, TreeNode<T> *parrent) {
             return insert(value, parrent, ANY);
         }
 
-        SharedPointer<Tree<T>> remove(const T &value) override {
+        SharedPointer<Tree<T>> remove(const T &value) {
             BTree<T> *ret = NULL;
 
             BTreeNode<T> *node = reinterpret_cast<BTreeNode<T> *>(find(value));
@@ -382,7 +382,7 @@ namespace DataStLib {
             return ret;
         }
 
-        SharedPointer<Tree<T>> remove(TreeNode<T> *node) override {
+        SharedPointer<Tree<T>> remove(TreeNode<T> *node) {
             BTree<T> *ret = NULL;
 
             node = find(node);
@@ -396,37 +396,37 @@ namespace DataStLib {
             return ret;
         }
 
-        TreeNode<T> *find(const T &value) const override {
+        TreeNode<T> *find(const T &value) const {
             return find(root(), value);
         }
 
-        TreeNode<T> *find(TreeNode<T> *node) override {
+        TreeNode<T> *find(TreeNode<T> *node) {
             return find(root(), dynamic_cast<BTreeNode<T> *>(node));
         }
 
-        BTreeNode<T> *root() const override {
+        BTreeNode<T> *root() const {
             return dynamic_cast<BTreeNode<T> *>(this->m_root);
         }
 
-        int degree() const override {
+        int degree() const {
             return degree(root());
         }
 
-        int count() const override {
+        int count() const {
             return count(root());
         }
 
-        int height() const override {
+        int height() const {
             return height(root());
         }
 
-        void clear() override {
+        void clear() {
             free(root());
             m_queue.clear();
             this->m_root = NULL;
         }
 
-        bool begin() override {
+        bool begin() {
             bool ret = (root() != NULL);
 
             if (ret) {
@@ -436,11 +436,11 @@ namespace DataStLib {
             return ret;
         }
 
-        bool end() override {//判断遍历是否结束
+        bool end() {//判断遍历是否结束
             return (m_queue.length() == 0); //队列为空表示遍历完毕
         }
 
-        bool next() override {
+        bool next() {
             bool ret = (m_queue.length() > 0); //有元素才移动
 
             if (ret) {
@@ -458,7 +458,7 @@ namespace DataStLib {
             return ret;
         }
 
-        T current() override {
+        T current() {
             if (!end()) {
                 return m_queue.front()->value;
             } else {
@@ -480,7 +480,7 @@ namespace DataStLib {
                     queue.remove();
                 }
             } else {
-                THROW_EXCEPTION(NoEnoughMemoryException, "NoEnough memory to crear DynamicArray...");
+                THROW_EXCEPTION(NoEnoughMemoryException, "NoEnough memory to create DynamicArray...");
             }
             return ret;
         }
@@ -491,7 +491,7 @@ namespace DataStLib {
             if (ret != NULL) {
                 ret->m_root = clone(root());
             } else {
-                THROW_EXCEPTION(NoEnoughMemoryException, "No memory to creat node...");
+                THROW_EXCEPTION(NoEnoughMemoryException, "No memory to create node...");
             }
             return ret;
         }
@@ -510,7 +510,7 @@ namespace DataStLib {
             if (ret != NULL) {
                 ret->m_root = add(root(), btree.root());
             } else {
-                THROW_EXCEPTION(NoEnoughMemoryException, "No enough memory to creat node...");
+                THROW_EXCEPTION(NoEnoughMemoryException, "No enough memory to create node...");
             }
             return ret;
         }

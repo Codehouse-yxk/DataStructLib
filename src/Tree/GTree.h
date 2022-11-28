@@ -45,7 +45,7 @@ namespace DataStLib {
             ret = new GTree<T>();
 
             if (ret == NULL) {
-                THROW_EXCEPTION(NoEnoughMemoryException, "No memory to creat new tree");
+                THROW_EXCEPTION(NoEnoughMemoryException, "No memory to create new tree");
             } else {
                 if (root() == node) {
                     this->m_root = NULL;
@@ -102,7 +102,7 @@ namespace DataStLib {
         }
 
     public:
-        bool insert(TreeNode<T> *node) override {
+        bool insert(TreeNode<T> *node) {
             bool ret = true;
             if (node != NULL) {
                 if (this->m_root == NULL) //若为空树，那么插入的新节点作为根节点
@@ -128,7 +128,7 @@ namespace DataStLib {
             return ret;
         }
 
-        bool insert(const T &value, TreeNode<T> *parrent) override {//在给定的父节点插入元素
+        bool insert(const T &value, TreeNode<T> *parrent) {//在给定的父节点插入元素
             bool ret = true;
 
             GTreeNode<T> *newNode = GTreeNode<T>::NewNode();
@@ -138,13 +138,13 @@ namespace DataStLib {
                 newNode->parent = parrent;
                 insert(dynamic_cast<TreeNode<T> *>(newNode));
             } else {
-                THROW_EXCEPTION(NoEnoughMemoryException, "No memory to creat new tree node...");
+                THROW_EXCEPTION(NoEnoughMemoryException, "No memory to create new tree node...");
             }
 
             return ret;
         }
 
-        SharedPointer<Tree<T>> remove(const T &value) override {
+        SharedPointer<Tree<T>> remove(const T &value) {
             GTree<T> *ret = NULL;
             GTreeNode<T> *node = find(value);
 
@@ -157,7 +157,7 @@ namespace DataStLib {
             return ret;
         }
 
-        SharedPointer<Tree<T>> remove(TreeNode<T> *node) override {
+        SharedPointer<Tree<T>> remove(TreeNode<T> *node) {
             GTree<T> *ret = NULL;
             node = find(node);
 
@@ -170,12 +170,12 @@ namespace DataStLib {
             return ret;
         }
 
-        TreeNode<T> *find(const T &value) const override //查找操作最终返回目标数据地址
+        TreeNode<T> *find(const T &value) const   //查找操作最终返回目标数据地址
         {
             return find(root(), value);
         }
 
-        TreeNode<T> *find(TreeNode<T> *node) override //查找操作最终返回目标结点地址
+        TreeNode<T> *find(TreeNode<T> *node)   //查找操作最终返回目标结点地址
         {
             return find(root(), dynamic_cast<GTreeNode<T> *>(node));
         }
@@ -191,23 +191,23 @@ namespace DataStLib {
             }
         }
 
-        GTreeNode<T> *root() const override {
+        GTreeNode<T> *root() const {
             return (dynamic_cast<GTreeNode<T> *>(this->m_root));
         }
 
-        int degree() const override {
+        int degree() const {
             return degree(root());
         }
 
-        int count() const override {
+        int count() const {
             return count(root());
         }
 
-        int height() const override {
+        int height() const {
             return height(root());
         }
 
-        void clear() override { //销毁树，但没有释放每个结点
+        void clear() { //销毁树，但没有释放每个结点
             free(root());
             this->m_root = NULL;
 
@@ -215,7 +215,7 @@ namespace DataStLib {
         }
 
         /*============ 层次遍历（根节点开始，每行从左到右遍历），使用游标思想 ==========*/
-        bool begin() override {
+        bool begin() {
             bool ret = (root() != NULL);
 
             if (ret) {
@@ -225,11 +225,11 @@ namespace DataStLib {
             return ret;
         }
 
-        bool end() override {//判断遍历是否结束
+        bool end() {//判断遍历是否结束
             return (m_queue.length() == 0); //队列为空表示遍历完毕
         }
 
-        bool next() override {
+        bool next() {
             bool ret = (m_queue.length() > 0); //有元素才移动
 
             if (ret) {
@@ -245,7 +245,7 @@ namespace DataStLib {
             return ret;
         }
 
-        T current() override {
+        T current() {
             if (!end()) {
                 return m_queue.front()->value;
             } else {

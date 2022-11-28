@@ -8,11 +8,11 @@ using namespace std;
 namespace DataStLib {
     class Object {
     public:
-        void *operator new(size_t size) noexcept;
+        void *operator new(size_t size) throw();
 
         void operator delete(void *p);
 
-        void *operator new[](size_t size) noexcept;
+        void *operator new[](size_t size) throw();
 
         void operator delete[](void *p);
 

@@ -2,7 +2,7 @@
 #define LINKSTACK
 
 #include "Stack.h"
-#include "linklist.h"
+#include "LinkList.h"
 
 namespace DataStLib {
     template<typename T>
