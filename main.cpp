@@ -153,7 +153,9 @@ int main() {
 
     try {
 //        Test::BTreeTest();
-        Test::MatrixGraphTest();
+//        Test::MatrixGraphTest();
+        Test::ListGraphTest();
+
     } catch (Exception &e) {
         cout << "catch a exception info: " << e.message() << " at " << e.location() << endl;
     }

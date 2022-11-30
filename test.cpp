@@ -117,4 +117,77 @@ namespace DataStLib {
         p.setVertex(1, 10);
         cout << "after modify point 1 value: " << p.getVertex(1) << endl;
     }
+
+    void Test::ListGraphTest() {
+        /*
+         * A --> B --> C --> D
+         * A --> D
+         * D --> B
+         * */
+
+        ListGraph<char, int> g;
+
+        //添加顶点
+        cout << "add vertex..." << endl;
+        g.addVertex('A');
+        g.addVertex('B');
+        g.addVertex('C');
+        g.addVertex('D');
+
+        for (int i = 0; i < g.vCount(); i++) {
+            cout << i << " : " << g.getVertex(i) << endl;
+        }
+
+        //移除一个顶点
+        g.removeVertex();
+        cout << "after remove vertex..." << endl;
+        for (int i = 0; i < g.vCount(); i++) {
+            cout << i << " : " << g.getVertex(i) << endl;
+        }
+        g.addVertex('D');
+
+        cout << "set edge for vertex..." << endl;
+        g.setEdge(0, 1, 5);
+        g.setEdge(0, 3, 6);
+        g.setEdge(1, 2, 8);
+        g.setEdge(2, 3, 2);
+        g.setEdge(3, 1, 9);
+
+        cout << "0 -> 1: " << g.getEdge(0, 1) << endl;
+        cout << "0 -> 3: " << g.getEdge(0, 3) << endl;
+        cout << "1 -> 2: " << g.getEdge(1, 2) << endl;
+        cout << "2 -> 3: " << g.getEdge(2, 3) << endl;
+        cout << "3 -> 1: " << g.getEdge(3, 1) << endl;
+
+        SharedPointer<Array<int>> arr = g.getAdjacent(3);
+        cout << "node 0 adjacent node: [  ";
+        for (int i = 0; i < arr->length(); i++) {
+            cout << (*arr)[i] << "  ";
+        }
+        cout << "]" << endl;
+
+        //结点入度
+        cout << "point 0 in degraee : " << g.ID(0) << endl;
+        cout << "point 1 in degraee : " << g.ID(1) << endl;
+        cout << "point 2 in degraee : " << g.ID(2) << endl;
+        cout << "point 3 in degraee : " << g.ID(3) << endl;
+
+        //结点出度
+        cout << "point 0 out degraee : " << g.OD(0) << endl;
+        cout << "point 1 out degraee : " << g.OD(1) << endl;
+        cout << "point 2 out degraee : " << g.OD(2) << endl;
+        cout << "point 3 out degraee : " << g.OD(3) << endl;
+
+        //结点总度
+        cout << "point 0 total degraee : " << g.TD(0) << endl;
+        cout << "point 1 total degraee : " << g.TD(1) << endl;
+        cout << "point 2 total degraee : " << g.TD(2) << endl;
+        cout << "point 3 total degraee : " << g.TD(3) << endl;
+
+        cout << "egge total num: " << g.eCount() << endl;
+        g.removeEdge(0, 1);
+        g.removeEdge(2, 3);
+        cout << "egge total num: " << g.eCount() << endl;
+        g.removeEdge(3, 3); //边不存在，抛异常
+    }
 }

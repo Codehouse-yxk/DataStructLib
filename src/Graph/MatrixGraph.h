@@ -173,24 +173,31 @@ namespace DataStLib {
 
         int OD(int i) {
             int ret = 0;
+
             if ((0 <= i) && (i < vCount())) {
                 for (int j = 0; j < vCount(); j++) {
                     if (m_edges[i][j] != NULL) {
                         ret++;
                     }
                 }
+            } else {
+                THROW_EXCEPTION(InvalidParameterException, "Index i is invalid...");
             }
+
             return ret;
         }
 
         int ID(int i) {
             int ret = 0;
+
             if ((0 <= i) && (i < vCount())) {
                 for (int j = 0; j < vCount(); j++) {
                     if (m_edges[j][i] != NULL) {
                         ret++;
                     }
                 }
+            } else {
+                THROW_EXCEPTION(InvalidParameterException, "Index i is invalid...");
             }
             return ret;
         }

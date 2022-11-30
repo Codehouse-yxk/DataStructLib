@@ -30,6 +30,7 @@
 #include "String.h"
 #include "Graph.h"
 #include "MatrixGraph.h"
+#include "ListGraph.h"
 
 namespace DataStLib {
     class Test {
@@ -37,6 +38,8 @@ namespace DataStLib {
         static void BTreeTest();
 
         static void MatrixGraphTest();
+
+        static void ListGraphTest();
     };
 }
 
