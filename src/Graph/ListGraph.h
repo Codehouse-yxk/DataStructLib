@@ -62,7 +62,7 @@ namespace DataStLib {
         }
 
         /* 添加顶点并返回顶点编号 */
-        int addVertex() {
+        int addVertex() {       //O(n)
             int ret = -1;
             Vertex *v = new Vertex();
 
@@ -77,7 +77,7 @@ namespace DataStLib {
         }
 
         /* 添加顶点并返回顶点编号，同时设置顶点的值 */
-        int addVertex(const V &value) {
+        int addVertex(const V &value) {     //O(n)
             int ret = addVertex();
 
             if (ret != -1) {
@@ -87,7 +87,7 @@ namespace DataStLib {
             return ret;
         }
 
-        V getVertex(int i) {
+        V getVertex(int i) {     //O(n)
             V ret;
 
             if (!getVertex(i, ret)) {
@@ -97,7 +97,7 @@ namespace DataStLib {
             return ret;
         }
 
-        bool getVertex(int i, V &value) {
+        bool getVertex(int i, V &value) {    //O(n)
             bool ret = (0 <= i) && (i < vCount());
 
             if (ret) {
@@ -113,7 +113,7 @@ namespace DataStLib {
             return ret;
         }
 
-        bool setVertex(int i, const V &value) {
+        bool setVertex(int i, const V &value) {  //O(n)
             bool ret = (0 <= i) && (i < vCount());
 
             if (ret) {
@@ -136,15 +136,15 @@ namespace DataStLib {
         }
 
         /* 删除一个顶点【链表中最后一个】 */
-        void removeVertex() {
+        void removeVertex() {    //O(n^2)
             if (m_list.length() > 0) {
                 int nodeIndex = m_list.length() - 1;
-                Vertex *v = m_list.get(nodeIndex);
+                Vertex *v = m_list.get(nodeIndex);   //O(n)
 
                 //删除一个顶点，需要删除所有与该顶点相关的边
                 if (m_list.remove(nodeIndex)) {
-                    for (int i = (m_list.move(0), 0); !m_list.end(); m_list.next(), i++) {
-                        int pos = m_list.current()->edge.find(Edge<E>(i, nodeIndex));
+                    for (int i = (m_list.move(0), 0); !m_list.end(); m_list.next(), i++) {   //O(n)
+                        int pos = m_list.current()->edge.find(Edge<E>(i, nodeIndex)); //O(n)
                         if (pos >= 0) {    //找到目标,索引为pos
                             m_list.current()->edge.remove(pos); //删除与顶点nodeIndex相关的边
                         }
@@ -157,16 +157,16 @@ namespace DataStLib {
             }
         }
 
-        SharedPointer <Array<int>> getAdjacent(int i) {
+        SharedPointer <Array<int>> getAdjacent(int i) {  //O(n)
             DynamicArray<int> *ret = NULL;
 
             if ((0 <= i) && (i < vCount())) {
-                LinkList<Edge<E>> &e = m_list.get(i)->edge;
+                LinkList<Edge<E>> &e = m_list.get(i)->edge;  //O(n)
                 ret = new DynamicArray<int>(e.length());
                 if (ret != NULL) {
                     auto oo = *ret;
-                    for (int n = (e.move(0), 0); !e.end(); e.next(), n++) {
-                        ret->set(n, e.current().end);
+                    for (int n = (e.move(0), 0); !e.end(); e.next(), n++) {  //O(n)
+                        ret->set(n, e.current().end);    //O(1)
                     }
                 } else {
                     THROW_EXCEPTION(NoEnoughMemoryException, "No enough memory to new array...");
@@ -178,7 +178,7 @@ namespace DataStLib {
             return ret;
         }
 
-        E getEdge(int i, int j) {
+        E getEdge(int i, int j) {    //O(n)
             E ret;
 
             if (!getEdge(i, j, ret)) {
@@ -188,14 +188,14 @@ namespace DataStLib {
             return ret;
         }
 
-        bool getEdge(int i, int j, E &value) {
+        bool getEdge(int i, int j, E &value) {   //O(n)
             int ret = ((0 <= i) && (i < vCount())) && ((0 <= j) && (j < vCount()));
 
             if (ret) {
-                LinkList<Edge<E>> &e = m_list.get(i)->edge;
-                int pos = e.find(Edge<E>(i, j));
+                LinkList<Edge<E>> &e = m_list.get(i)->edge;  //O(n)
+                int pos = e.find(Edge<E>(i, j));     //O(n)
                 if (pos >= 0) {
-                    value = e.get(pos).data;
+                    value = e.get(pos).data;     //O(n)
                 } else {
                     THROW_EXCEPTION(InvalidOperationException, "No value create on this edge...");
                 }
@@ -204,30 +204,30 @@ namespace DataStLib {
             return ret;
         }
 
-        bool setEdge(int i, int j, const E &value) {
+        bool setEdge(int i, int j, const E &value) {     //O(n)
             int ret = ((0 <= i) && (i < vCount())) && ((0 <= j) && (j < vCount()));
 
             if (ret) {
-                LinkList<Edge<E>> &e = m_list.get(i)->edge;
-                int pos = e.find(Edge<E>(i, j));
+                LinkList<Edge<E>> &e = m_list.get(i)->edge;  //O(n)
+                int pos = e.find(Edge<E>(i, j));     //O(n)
                 if (pos >= 0) {   //存在目标边
                     ret = e.set(pos, Edge<E>(i, j, value));
                 } else {  //不存在目标边
-                    ret = e.insert(0, Edge<E>(i, j, value));
+                    ret = e.insert(0, Edge<E>(i, j, value));   //在0位置插入可以提高效率，但是会影响图遍历的顶点顺序
                 }
             }
 
             return ret;
         }
 
-        bool removeEdge(int i, int j) {
+        bool removeEdge(int i, int j) {  //O(n)
             int ret = ((0 <= i) && (i < vCount())) && ((0 <= j) && (j < vCount()));
 
             if (ret) {
-                LinkList<Edge<E>> &e = m_list.get(i)->edge;
-                int pos = e.find(Edge<E>(i, j));
+                LinkList<Edge<E>> &e = m_list.get(i)->edge;  //O(n)
+                int pos = e.find(Edge<E>(i, j));     //O(n)
                 if (pos >= 0) {
-                    ret = e.remove(pos);
+                    ret = e.remove(pos);     //O(n)
                 } else {
                     THROW_EXCEPTION(InvalidOperationException, "not find [i, j] edge...");
                 }
@@ -236,25 +236,25 @@ namespace DataStLib {
             return ret;
         }
 
-        int vCount() {
+        int vCount() {   //O(1)
             return m_list.length();
         }
 
-        int eCount() {
+        int eCount() {   //O(n)
             int ret = 0;
 
-            for (m_list.move(0); !m_list.end(); m_list.next()) {
+            for (m_list.move(0); !m_list.end(); m_list.next()) {     //O(n)
                 ret += m_list.current()->edge.length();
             }
 
             return ret;
         }
 
-        int OD(int i) {
+        int OD(int i) {  //O(n)
             int ret = 0;
 
             if ((0 <= i) && (i < vCount())) {
-                ret = m_list.get(i)->edge.length();
+                ret = m_list.get(i)->edge.length();  //O(n)
             } else {
                 THROW_EXCEPTION(InvalidParameterException, "Index i is invalid...");
             }
@@ -262,13 +262,13 @@ namespace DataStLib {
             return ret;
         }
 
-        int ID(int i) {
+        int ID(int i) {  //O(n^2)
             int ret = 0;
 
             if ((0 <= i) && (i < vCount())) {
-                for (m_list.move(0); !m_list.end(); m_list.next()) {
+                for (m_list.move(0); !m_list.end(); m_list.next()) {     //O(n)
                     LinkList<Edge<E>> &e = m_list.current()->edge;
-                    for (e.move(0); !e.end(); e.next()) {
+                    for (e.move(0); !e.end(); e.next()) {    //O(n)
                         if (e.current().end == i) {
                             ret++;
                             break;

@@ -190,4 +190,316 @@ namespace DataStLib {
         cout << "egge total num: " << g.eCount() << endl;
         g.removeEdge(3, 3); //边不存在，抛异常
     }
+
+    void Test::MatrixGraphBFSTest() {
+        MatrixGraph<9, char, int> g;
+        const char *D = "ABEDCGFHI";
+        for (int i = 0; i < 9; i++) {
+            g.setVertex(i, D[i]);
+        }
+
+        //无向图用有向图表示——>对称设置边
+        g.setEdge(0, 1, 0);
+        g.setEdge(1, 0, 0);
+
+        g.setEdge(0, 3, 0);
+        g.setEdge(3, 0, 0);
+
+        g.setEdge(0, 4, 0);
+        g.setEdge(4, 0, 0);
+
+        g.setEdge(1, 2, 0);
+        g.setEdge(2, 1, 0);
+
+        g.setEdge(1, 4, 0);
+        g.setEdge(4, 1, 0);
+
+        g.setEdge(2, 5, 0);
+        g.setEdge(5, 2, 0);
+
+        g.setEdge(3, 6, 0);
+        g.setEdge(6, 3, 0);
+
+        g.setEdge(4, 6, 0);
+        g.setEdge(6, 4, 0);
+
+        g.setEdge(7, 6, 0);
+        g.setEdge(6, 7, 0);
+
+        g.setEdge(8, 7, 0);
+        g.setEdge(7, 8, 0);
+
+        SharedPointer<Array<int>> bfs = g.BFS(0);
+        cout << "matrix graph bfs result: [ ";
+        for (int i = 0; i < bfs->length(); i++) {
+            cout << (*bfs)[i] << " ";
+        }
+        cout << "]" << endl;
+
+        cout << "matrix graph bfs result: [ ";
+        for (int i = 0; i < bfs->length(); i++) {
+            cout << g.getVertex((*bfs)[i]) << " ";
+        }
+        cout << "]" << endl;
+    }
+
+    void Test::ListGraphBFSTest() {
+        ListGraph<char, int> g;
+        const char *D = "ABEDCGFHI";
+        for (int i = 0; i < 9; i++) {
+            g.addVertex(D[i]);
+        }
+
+        //无向图用有向图表示——>对称设置边
+        g.setEdge(0, 1, 0);
+        g.setEdge(1, 0, 0);
+
+        g.setEdge(0, 3, 0);
+        g.setEdge(3, 0, 0);
+
+        g.setEdge(0, 4, 0);
+        g.setEdge(4, 0, 0);
+
+        g.setEdge(1, 2, 0);
+        g.setEdge(2, 1, 0);
+
+        g.setEdge(1, 4, 0);
+        g.setEdge(4, 1, 0);
+
+        g.setEdge(2, 5, 0);
+        g.setEdge(5, 2, 0);
+
+        g.setEdge(3, 6, 0);
+        g.setEdge(6, 3, 0);
+
+        g.setEdge(4, 6, 0);
+        g.setEdge(6, 4, 0);
+
+        g.setEdge(7, 6, 0);
+        g.setEdge(6, 7, 0);
+
+        g.setEdge(8, 7, 0);
+        g.setEdge(7, 8, 0);
+
+        SharedPointer<Array<int>> bfs = g.BFS(0);
+        cout << "list graph bfs result: [ ";
+        for (int i = 0; i < bfs->length(); i++) {
+            cout << (*bfs)[i] << " ";
+        }
+        cout << "]" << endl;
+
+        cout << "list graph bfs result: [ ";
+        for (int i = 0; i < bfs->length(); i++) {
+            cout << g.getVertex((*bfs)[i]) << " ";
+        }
+        cout << "]" << endl;
+    }
+
+    void Test::MatrixGraphDFSTest() {
+        MatrixGraph<9, char, int> g;
+        const char *D = "ABEDCGFHI";
+        for (int i = 0; i < 9; i++) {
+            g.setVertex(i, D[i]);
+        }
+
+        //无向图用有向图表示——>对称设置边
+        g.setEdge(0, 1, 0);
+        g.setEdge(1, 0, 0);
+
+        g.setEdge(0, 3, 0);
+        g.setEdge(3, 0, 0);
+
+        g.setEdge(0, 4, 0);
+        g.setEdge(4, 0, 0);
+
+        g.setEdge(1, 2, 0);
+        g.setEdge(2, 1, 0);
+
+        g.setEdge(1, 4, 0);
+        g.setEdge(4, 1, 0);
+
+        g.setEdge(2, 5, 0);
+        g.setEdge(5, 2, 0);
+
+        g.setEdge(3, 6, 0);
+        g.setEdge(6, 3, 0);
+
+        g.setEdge(4, 6, 0);
+        g.setEdge(6, 4, 0);
+
+        g.setEdge(7, 6, 0);
+        g.setEdge(6, 7, 0);
+
+        g.setEdge(8, 7, 0);
+        g.setEdge(7, 8, 0);
+
+        SharedPointer<Array<int>> dfs = g.DFS(0);
+        cout << "matrix graph dfs result: [ ";
+        for (int i = 0; i < dfs->length(); i++) {
+            cout << (*dfs)[i] << " ";
+        }
+        cout << "]" << endl;
+
+        cout << "matrix graph dfs result: [ ";
+        for (int i = 0; i < dfs->length(); i++) {
+            cout << g.getVertex((*dfs)[i]) << " ";
+        }
+        cout << "]" << endl;
+    }
+
+    void Test::ListGraphDFSTest() {
+        ListGraph<char, int> g;
+        const char *D = "ABEDCGFHI";
+        for (int i = 0; i < 9; i++) {
+            g.addVertex(D[i]);
+        }
+
+        //无向图用有向图表示——>对称设置边
+        g.setEdge(0, 1, 0);
+        g.setEdge(1, 0, 0);
+
+        g.setEdge(0, 3, 0);
+        g.setEdge(3, 0, 0);
+
+        g.setEdge(0, 4, 0);
+        g.setEdge(4, 0, 0);
+
+        g.setEdge(1, 2, 0);
+        g.setEdge(2, 1, 0);
+
+        g.setEdge(1, 4, 0);
+        g.setEdge(4, 1, 0);
+
+        g.setEdge(2, 5, 0);
+        g.setEdge(5, 2, 0);
+
+        g.setEdge(3, 6, 0);
+        g.setEdge(6, 3, 0);
+
+        g.setEdge(4, 6, 0);
+        g.setEdge(6, 4, 0);
+
+        g.setEdge(7, 6, 0);
+        g.setEdge(6, 7, 0);
+
+        g.setEdge(8, 7, 0);
+        g.setEdge(7, 8, 0);
+
+        SharedPointer<Array<int>> dfs = g.DFS(0);
+        cout << "list graph dfs result: [ ";
+        for (int i = 0; i < dfs->length(); i++) {
+            cout << (*dfs)[i] << " ";
+        }
+        cout << "]" << endl;
+
+        cout << "list graph bfs result: [ ";
+        for (int i = 0; i < dfs->length(); i++) {
+            cout << g.getVertex((*dfs)[i]) << " ";
+        }
+        cout << "]" << endl;
+    }
+
+    void Test::MatrixGraphDFSByRecursiveTest() {
+        MatrixGraph<9, char, int> g;
+        const char *D = "ABEDCGFHI";
+        for (int i = 0; i < 9; i++) {
+            g.setVertex(i, D[i]);
+        }
+
+        //无向图用有向图表示——>对称设置边
+        g.setEdge(0, 1, 0);
+        g.setEdge(1, 0, 0);
+
+        g.setEdge(0, 3, 0);
+        g.setEdge(3, 0, 0);
+
+        g.setEdge(0, 4, 0);
+        g.setEdge(4, 0, 0);
+
+        g.setEdge(1, 2, 0);
+        g.setEdge(2, 1, 0);
+
+        g.setEdge(1, 4, 0);
+        g.setEdge(4, 1, 0);
+
+        g.setEdge(2, 5, 0);
+        g.setEdge(5, 2, 0);
+
+        g.setEdge(3, 6, 0);
+        g.setEdge(6, 3, 0);
+
+        g.setEdge(4, 6, 0);
+        g.setEdge(6, 4, 0);
+
+        g.setEdge(7, 6, 0);
+        g.setEdge(6, 7, 0);
+
+        g.setEdge(8, 7, 0);
+        g.setEdge(7, 8, 0);
+
+        SharedPointer<Array<int>> dfs = g.DFSByRecursive(0);
+        cout << "matrix graph dfs result: [ ";
+        for (int i = 0; i < dfs->length(); i++) {
+            cout << (*dfs)[i] << " ";
+        }
+        cout << "]" << endl;
+
+        cout << "matrix graph dfs result: [ ";
+        for (int i = 0; i < dfs->length(); i++) {
+            cout << g.getVertex((*dfs)[i]) << " ";
+        }
+        cout << "]" << endl;
+    }
+
+    void Test::ListGraphDFSByRecursiveTest() {
+        ListGraph<char, int> g;
+        const char *D = "ABEDCGFHI";
+        for (int i = 0; i < 9; i++) {
+            g.addVertex(D[i]);
+        }
+
+        //无向图用有向图表示——>对称设置边
+        g.setEdge(0, 1, 0);
+        g.setEdge(1, 0, 0);
+
+        g.setEdge(0, 3, 0);
+        g.setEdge(3, 0, 0);
+
+        g.setEdge(0, 4, 0);
+        g.setEdge(4, 0, 0);
+
+        g.setEdge(1, 2, 0);
+        g.setEdge(2, 1, 0);
+
+        g.setEdge(1, 4, 0);
+        g.setEdge(4, 1, 0);
+
+        g.setEdge(2, 5, 0);
+        g.setEdge(5, 2, 0);
+
+        g.setEdge(3, 6, 0);
+        g.setEdge(6, 3, 0);
+
+        g.setEdge(4, 6, 0);
+        g.setEdge(6, 4, 0);
+
+        g.setEdge(7, 6, 0);
+        g.setEdge(6, 7, 0);
+
+        g.setEdge(8, 7, 0);
+        g.setEdge(7, 8, 0);
+
+        SharedPointer<Array<int>> dfs = g.DFSByRecursive(0);
+        cout << "list graph dfs result: [ ";
+        for (int i = 0; i < dfs->length(); i++) {
+            cout << (*dfs)[i] << " ";
+        }
+        cout << "]" << endl;
+
+        cout << "list graph bfs result: [ ";
+        for (int i = 0; i < dfs->length(); i++) {
+            cout << g.getVertex((*dfs)[i]) << " ";
+        }
+        cout << "]" << endl;
+    }
 }

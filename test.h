@@ -40,6 +40,18 @@ namespace DataStLib {
         static void MatrixGraphTest();
 
         static void ListGraphTest();
+
+        static void MatrixGraphBFSTest();
+
+        static void ListGraphBFSTest();
+
+        static void MatrixGraphDFSTest();
+
+        static void ListGraphDFSTest();
+
+        static void MatrixGraphDFSByRecursiveTest();
+
+        static void ListGraphDFSByRecursiveTest();
     };
 }
 

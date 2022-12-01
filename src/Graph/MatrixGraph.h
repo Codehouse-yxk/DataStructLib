@@ -37,7 +37,7 @@ namespace DataStLib {
             m_eCount = 0;
         }
 
-        V getVertex(int i) {
+        V getVertex(int i) {    //O(1)
             V ret;
 
             if (!getVertex(i, ret)) {
@@ -47,7 +47,7 @@ namespace DataStLib {
             return ret;
         }
 
-        bool getVertex(int i, V &value) {
+        bool getVertex(int i, V &value) {    //O(1)
             int ret = (0 <= i) && (i < vCount());
             if (ret) {
                 if (m_vertexes[i] != NULL) {
@@ -59,7 +59,7 @@ namespace DataStLib {
             return ret;
         }
 
-        bool setVertex(int i, const V &value) {
+        bool setVertex(int i, const V &value) {    //O(1)
             int ret = (0 <= i) && (i < vCount());
             if (ret) {
                 //通过data来满足异常安全性
@@ -78,7 +78,7 @@ namespace DataStLib {
             return ret;
         }
 
-        SharedPointer <Array<int>> getAdjacent(int i) {
+        SharedPointer <Array<int>> getAdjacent(int i) {     //O(n)
             DynamicArray<int> *ret = NULL;
 
             if ((0 <= i) && (i < vCount())) {
@@ -93,7 +93,7 @@ namespace DataStLib {
                 ret = new DynamicArray<int>(n);
 
                 if (ret != NULL) {
-                    for (int j = 0, k = 0; j < vCount(); j++) {
+                    for (int j = 0, k = 0; j < vCount(); j++) {     //反向遍历入栈
                         if (m_edges[i][j] != NULL) {
                             ret->set(k++, j);
                         }
@@ -108,7 +108,7 @@ namespace DataStLib {
             return ret;
         }
 
-        E getEdge(int i, int j) {
+        E getEdge(int i, int j) {       //O(1)
             E ret;
             if (!getEdge(i, j, ret)) {
                 THROW_EXCEPTION(InvalidParameterException, "Index [i,j] is invalid...");
@@ -116,7 +116,7 @@ namespace DataStLib {
             return ret;
         }
 
-        bool getEdge(int i, int j, E &value) {
+        bool getEdge(int i, int j, E &value) {      //O(1)
             int ret = ((0 <= i) && (i < vCount())) && ((0 <= j) && (j < vCount()));
             if (ret) {
                 if (m_edges[i][j] != NULL) {
@@ -128,7 +128,7 @@ namespace DataStLib {
             return ret;
         }
 
-        bool setEdge(int i, int j, const E &value) {
+        bool setEdge(int i, int j, const E &value) {        //O(1)
             int ret = ((0 <= i) && (i < vCount())) && ((0 <= j) && (j < vCount()));
             if (ret) {
                 //通过data来满足异常安全性
@@ -150,7 +150,7 @@ namespace DataStLib {
             return ret;
         }
 
-        bool removeEdge(int i, int j) {
+        bool removeEdge(int i, int j) {     //O(1)
             int ret = ((0 <= i) && (i < vCount())) && ((0 <= j) && (j < vCount()));
             if (ret) {
                 E *toDel = m_edges[i][j];
@@ -163,15 +163,15 @@ namespace DataStLib {
             return ret;
         }
 
-        int vCount() {
+        int vCount() {      //O(1)
             return N;
         }
 
-        int eCount() {
+        int eCount() {      //O(1)
             return m_eCount;
         }
 
-        int OD(int i) {
+        int OD(int i) {     //O(n)
             int ret = 0;
 
             if ((0 <= i) && (i < vCount())) {
@@ -187,7 +187,7 @@ namespace DataStLib {
             return ret;
         }
 
-        int ID(int i) {
+        int ID(int i) {     //O(n)
             int ret = 0;
 
             if ((0 <= i) && (i < vCount())) {

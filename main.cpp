@@ -154,8 +154,13 @@ int main() {
     try {
 //        Test::BTreeTest();
 //        Test::MatrixGraphTest();
-        Test::ListGraphTest();
-
+//        Test::ListGraphTest();
+//        Test::MatrixGraphBFSTest();
+//        Test::ListGraphBFSTest();
+        Test::MatrixGraphDFSTest();
+        Test::ListGraphDFSTest();
+        Test::MatrixGraphDFSByRecursiveTest();
+        Test::ListGraphDFSByRecursiveTest();
     } catch (Exception &e) {
         cout << "catch a exception info: " << e.message() << " at " << e.location() << endl;
     }
