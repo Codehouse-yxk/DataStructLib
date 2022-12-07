@@ -46,11 +46,13 @@ namespace DataStLib {
                 this->m_array = arr;
                 delete[] toDel;
             }
+            return *this;
         }
 
         ~RangeArray() {
             m_lower = 0;
             m_upper = 0;
+            delete[] this->m_array;
         }
 
         bool set(int i, const T &e) {     //时间复杂度O(1)
