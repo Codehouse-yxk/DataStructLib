@@ -6,6 +6,35 @@
 
 namespace DataStLib {
 
+    void Test::RangeArrayTest() {
+        RangeArray<int> a(-5, 5);
+        for (int i = -5; i <= 5; i++) {
+            a[i] = i;
+        }
+
+        cout << "array length: " << a.length() << endl;
+        cout << "array lower: " << a.lower() << endl;
+        cout << "array upper: " << a.upper() << endl;
+
+        for (int i = a.lower(); i <= a.upper(); i++) {
+            cout << a[i] << " ";
+        }
+        cout << endl;
+
+        RangeArray<int> b(0, 1);
+        b = a;
+        for (int i = b.lower(); i <= b.upper(); i++) {
+            cout << b[i] << " ";
+        }
+        cout << endl;
+
+        RangeArray<int> c(a);
+        for (int i = c.lower(); i <= c.upper(); i++) {
+            cout << c[i] << " ";
+        }
+        cout << endl;
+    }
+
     void Test::BTreeTest() {
         /*
                     A

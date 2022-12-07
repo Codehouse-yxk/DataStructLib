@@ -31,7 +31,7 @@ namespace DataStLib {
         }
 
         void add(const T &e) {    //O(1)
-            if (m_length <= N && N > 0) {
+            if (m_length < N) {
                 m_space[m_real] = e;
                 m_real = (m_real + 1) % N;
                 m_length++;
@@ -51,11 +51,11 @@ namespace DataStLib {
         }
 
         bool isEmerty() {     //O(1)
-            return ((m_length == 0) && (m_front == m_real));
+            return (m_length == 0);
         }
 
         bool isFull() {     //O(1)
-            return ((m_length == N) && (m_front == m_real));
+            return (m_length == N);
         }
 
         T front() const {    //O(1)

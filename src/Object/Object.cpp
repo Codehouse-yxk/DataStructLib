@@ -5,7 +5,7 @@
 namespace DataStLib {
 
     void *Object::operator new(size_t size) throw() {   //new申请内存失败时，确保函数不抛出异常，而是返回NULL
-        //cout << "operator new(unsigned int size)" << size << endl;
+        //cout << "operator new(size_t size)" << size << endl;
         return malloc(size);
     }
 
@@ -15,7 +15,7 @@ namespace DataStLib {
     }
 
     void *Object::operator new[](size_t size) throw() { //new申请内存失败时，确保函数不抛出异常，而是返回NULL
-        //cout << "operator new[](unsigned int size)" << endl;
+        //cout << "operator new[](size_t size)" << endl;
         return malloc(size);
     }
 

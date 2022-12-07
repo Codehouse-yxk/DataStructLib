@@ -1,4 +1,4 @@
-#include "String.h"
+#include "MyString.h"
 #include "Exception.h"
 #include <cstdlib>
 #include <cstring>
@@ -8,7 +8,7 @@ using namespace std;
 namespace DataStLib {
 
     // KMP子串查找算法---创建PMT表
-    int *String::MakePmtTable(const char *s) {
+    int *MyString::MakePmtTable(const char *s) {
         int len = strlen(s);
         int *table = static_cast<int *>(malloc(sizeof(int) * len));
 
@@ -35,7 +35,7 @@ namespace DataStLib {
     }
 
     // KMP算法
-    int String::KMP(const char *s, const char *p) {
+    int MyString::KMP(const char *s, const char *p) {
         int ret = -1;
         int sl = strlen(s);
         int pl = strlen(p);
@@ -60,15 +60,15 @@ namespace DataStLib {
         return ret;
     }
 
-    int String::indexOf(const char *s) const {
+    int MyString::indexOf(const char *s) const {
         return (KMP(m_str, s ? s : ""));
     }
 
-    int String::indexOf(const String &s) const {
+    int MyString::indexOf(const MyString &s) const {
         return (KMP(m_str, s.m_str));
     }
 
-    String &String::remove(int index, int len) {
+    MyString &MyString::remove(int index, int len) {
         if (index >= 0 && index < m_length) {
             int left = index;
             int right = index + len;
@@ -83,15 +83,15 @@ namespace DataStLib {
         return *this;
     }
 
-    String &String::remove(const char *s) {
+    MyString &MyString::remove(const char *s) {
         return remove(indexOf(s), s ? strlen(s) : 0);
     }
 
-    String &String::remove(const String &s) {
+    MyString &MyString::remove(const MyString &s) {
         return remove(indexOf(s), s.length());
     }
 
-    String &String::replace(const char *t, const char *s) {
+    MyString &MyString::replace(const char *t, const char *s) {
         int index = indexOf(t);
 
         if (index > 0) {
@@ -102,20 +102,20 @@ namespace DataStLib {
         return *this;
     }
 
-    String &String::replace(const String &t, const char *s) {
+    MyString &MyString::replace(const MyString &t, const char *s) {
         return replace(t.m_str, s);
     }
 
-    String &String::replace(const char *t, const String &s) {
+    MyString &MyString::replace(const char *t, const MyString &s) {
         return replace(t, s.m_str);
     }
 
-    String &String::replace(const String &t, const String &s) {
+    MyString &MyString::replace(const MyString &t, const MyString &s) {
         return replace(t.m_str, s.m_str);
     }
 
-    String String::sub(int index, int len) const {
-        String ret;
+    MyString MyString::sub(int index, int len) const {
+        MyString ret;
         if ((index >= 0) && (index < m_length) && (len >= 0)) {
             int length = (index + len > m_length) ? (m_length - index) : len;
 
@@ -135,41 +135,41 @@ namespace DataStLib {
         return ret;
     }
 
-    void String::init(const char *s) {
+    void MyString::init(const char *s) {
         m_str = strdup(s);
         if (m_str) {
             m_length = strlen(m_str);
         } else {
-            THROW_EXCEPTION(NoEnoughMemoryException, "No memory to create String Object");
+            THROW_EXCEPTION(NoEnoughMemoryException, "No memory to create MyString Object");
         }
     }
 
-    String::String() {
+    MyString::MyString() {
         init("");
     }
 
-    String::String(char c) {
+    MyString::MyString(char c) {
         char arr[] = {c, '\0'};
         init(arr);
     }
 
-    String::String(const char *s) {
+    MyString::MyString(const char *s) {
         init(s ? s : ""); //判断s是否为NULL
     }
 
-    String::String(const String &s) {
+    MyString::MyString(const MyString &s) {
         init(s.m_str);
     }
 
-    int String::length() const {
+    int MyString::length() const {
         return m_length;
     }
 
-    const char *String::str() const {
+    const char *MyString::str() const {
         return m_str;
     }
 
-    bool String::equal(const char *startaddr, const char *str, int len) const //判断字符串中的部分子串是否相相等
+    bool MyString::equal(const char *startaddr, const char *str, int len) const //判断字符串中的部分子串是否相相等
     {
         bool ret = (str != NULL);
         for (int i = 0; i < len && ret; i++) {
@@ -178,7 +178,7 @@ namespace DataStLib {
         return ret;
     }
 
-    bool String::startWith(const char *s) const {
+    bool MyString::startWith(const char *s) const {
         bool ret = (s != NULL);
 
         if (ret) {
@@ -189,11 +189,11 @@ namespace DataStLib {
         return ret;
     }
 
-    bool String::startWith(const String &s) const {
+    bool MyString::startWith(const MyString &s) const {
         return startWith(s.m_str);
     }
 
-    bool String::endOf(const char *s) const {
+    bool MyString::endOf(const char *s) const {
         bool ret = (s != NULL);
 
         if (ret) {
@@ -206,11 +206,11 @@ namespace DataStLib {
         return ret;
     }
 
-    bool String::endOf(const String &s) const {
+    bool MyString::endOf(const MyString &s) const {
         return endOf(s.m_str);
     }
 
-    String &String::insert(int i, const char *s) {
+    MyString &MyString::insert(int i, const char *s) {
         if ((i >= 0) && (i <= m_length)) {
             if ((s != NULL) && (s[0] != 0)) {
                 int len = strlen(s);
@@ -225,20 +225,20 @@ namespace DataStLib {
                     m_str = str;
                     m_length = m_length + len;
                 } else {
-                    THROW_EXCEPTION(NoEnoughMemoryException, "No memory in String& String::insert(int i, const char* s)");
+                    THROW_EXCEPTION(NoEnoughMemoryException, "No memory in MyString& MyString::insert(int i, const char* s)");
                 }
             }
         } else {
-            THROW_EXCEPTION(IndexOutOfBoundsException, "Parameter is invalid in String& String::insert(int i, const char* s)");
+            THROW_EXCEPTION(IndexOutOfBoundsException, "Parameter is invalid in MyString& MyString::insert(int i, const char* s)");
         }
         return *this;
     }
 
-    String &String::insert(int i, const String &s) {
+    MyString &MyString::insert(int i, const MyString &s) {
         return insert(i, s.m_str);
     }
 
-    String &String::trim() {
+    MyString &MyString::trim() {
         int b = 0;
         int e = m_length - 1;
         while (m_str[b] == ' ')
@@ -260,79 +260,79 @@ namespace DataStLib {
         return (*this);
     }
 
-    char &String::operator[](int i) {
+    char &MyString::operator[](int i) {
         if ((i >= 0) && (i < m_length)) {
             return m_str[i];
         } else {
-            THROW_EXCEPTION(IndexOutOfBoundsException, "Parameter is invalid in char& String::operator [](int i)");
+            THROW_EXCEPTION(IndexOutOfBoundsException, "Parameter is invalid in char& MyString::operator [](int i)");
         }
     }
 
-    char String::operator[](int i) const {
-        return (const_cast<String &>(*this))[i];
+    char MyString::operator[](int i) const {
+        return (const_cast<MyString &>(*this))[i];
     }
 
-    bool String::operator==(const String &s) const {
+    bool MyString::operator==(const MyString &s) const {
         return (strcmp(m_str, s.m_str) == 0);
     }
 
-    bool String::operator==(const char *s) const {
+    bool MyString::operator==(const char *s) const {
         return (strcmp(m_str, s) == 0);
     }
 
-    bool String::operator!=(const String &s) const {
+    bool MyString::operator!=(const MyString &s) const {
         return !(*this == s);
     }
 
-    bool String::operator!=(const char *s) const {
+    bool MyString::operator!=(const char *s) const {
         return !(*this == s);
     }
 
-    bool String::operator>(const String &s) const {
+    bool MyString::operator>(const MyString &s) const {
         return (strcmp(m_str, s.m_str) > 0);
     }
 
-    bool String::operator>(const char *s) const {
+    bool MyString::operator>(const char *s) const {
         return (strcmp(m_str, s) > 0);
     }
 
-    bool String::operator<(const String &s) const {
+    bool MyString::operator<(const MyString &s) const {
         return (strcmp(m_str, s.m_str) < 0);
     }
 
-    bool String::operator<(const char *s) const {
+    bool MyString::operator<(const char *s) const {
         return (strcmp(m_str, s) < 0);
     }
 
-    bool String::operator<=(const String &s) const {
+    bool MyString::operator<=(const MyString &s) const {
         return (strcmp(m_str, s.m_str) <= 0);
     }
 
-    bool String::operator<=(const char *s) const {
+    bool MyString::operator<=(const char *s) const {
         return (strcmp(m_str, s) <= 0);
     }
 
-    bool String::operator>=(const String &s) const {
+    bool MyString::operator>=(const MyString &s) const {
         return (strcmp(m_str, s.m_str) >= 0);
     }
 
-    bool String::operator>=(const char *s) const {
+    bool MyString::operator>=(const char *s) const {
         return (strcmp(m_str, s) >= 0);
     }
 
-    String String::operator+(const String &s) const {
+    MyString MyString::operator+(const MyString &s) const {
         return (*this + s.m_str);
     }
 
-    String String::operator+(const char *s) const {
-        String ret;
+    MyString MyString::operator+(const char *s) const {
+        MyString ret;
         int len = m_length + strlen(s);
         char *str = reinterpret_cast<char *>(malloc(len + 1));
         if (str) {
             strcpy(str, m_str);
             strcat(str, s ? s : "");
 
-            // free(ret.m_str);
+            free(ret.m_str);
 
             ret.m_str = str;
             ret.m_length = len;
@@ -342,35 +342,35 @@ namespace DataStLib {
         return ret;
     }
 
-    String &String::operator+=(const String &s) {
+    MyString &MyString::operator+=(const MyString &s) {
         return (*this = *this + s);
     }
 
-    String &String::operator+=(const char *s) {
+    MyString &MyString::operator+=(const char *s) {
         return (*this = *this + s);
     }
 
-    String String::operator-(const String &s) const {
-        return String(*this).remove(s);
+    MyString MyString::operator-(const MyString &s) const {
+        return MyString(*this).remove(s);
     }
 
-    String String::operator-(const char *s) const {
-        return String(*this).remove(s);
+    MyString MyString::operator-(const char *s) const {
+        return MyString(*this).remove(s);
     }
 
-    String &String::operator-=(const String &s) {
+    MyString &MyString::operator-=(const MyString &s) {
         return remove(s);
     }
 
-    String &String::operator-=(const char *s) {
+    MyString &MyString::operator-=(const char *s) {
         return remove(s);
     }
 
-    String &String::operator=(const String &s) {
+    MyString &MyString::operator=(const MyString &s) {
         return (*this = s.m_str);
     }
 
-    String &String::operator=(const char *s) {
+    MyString &MyString::operator=(const char *s) {
         if (m_str != s) {
             char *str = strdup(s);
 
@@ -379,18 +379,18 @@ namespace DataStLib {
                 m_str = str;
                 m_length = strlen(m_str);
             } else {
-                THROW_EXCEPTION(NoEnoughMemoryException, "NO memory in String& String::operator =(const char* s)const");
+                THROW_EXCEPTION(NoEnoughMemoryException, "NO memory in MyString& MyString::operator =(const char* s)const");
             }
         }
         return *this;
     }
 
-    String &String::operator=(const char c) {
+    MyString &MyString::operator=(const char c) {
         char arr[] = {c, '\0'};
         return (*this = arr);
     }
 
-    String::~String() {
+    MyString::~MyString() {
         free(m_str);
     }
 }

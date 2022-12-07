@@ -27,7 +27,7 @@ namespace DataStLib {
             return ret;
         }
 
-        T &operator[](int i) {     //时间复杂度O(1)
+        virtual T &operator[](int i) {     //时间复杂度O(1)
             bool ret = ((i >= 0) && (i < length()));
             if (ret) {
                 return m_array[i];
@@ -36,7 +36,7 @@ namespace DataStLib {
             }
         }
 
-        T operator[](int i) const {     //时间复杂度O(1)
+        virtual T operator[](int i) const {     //时间复杂度O(1)
             return (const_cast<Array<T> &>(*this))[i];
         }
 
@@ -46,7 +46,13 @@ namespace DataStLib {
 
         virtual int length() const = 0;
 
+        virtual ~Array() = 0;
     };
+
+    template<typename T>
+    Array<T>::~Array() {
+        m_array = NULL;
+    }
 }
 
 

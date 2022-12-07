@@ -31,12 +31,18 @@
 #include "Graph.h"
 #include "MatrixGraph.h"
 #include "ListGraph.h"
+#include "RangeArray.h"
 
 namespace DataStLib {
     class Test {
     public:
+        /*******************数组-测试*****************/
+        static void RangeArrayTest();
+
+        /*******************树-测试*****************/
         static void BTreeTest();
 
+        /*******************图-测试*****************/
         static void MatrixGraphTest();
 
         static void ListGraphTest();

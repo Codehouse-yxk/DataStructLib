@@ -11,7 +11,7 @@ namespace DataStLib {
         typedef typename LinkList<T>::Node Node;    //由于父类Node类型中含有T型成员，所以不能在子类中直接使用Node定义对象，
         //而要改为"typename LinkList<T>::Node xxx"。typename LinkList<T>::Node是类型
         struct SNode : public Node {    //Node的子类，只是为了重载new操作符，以便在指定地址创建对象
-            void *operator new(unsigned long size, void *loc) {
+            void *operator new(size_t size, void *loc) {
                 (void) size;     //C语言中暴力处理方式
                 return loc;
             }
