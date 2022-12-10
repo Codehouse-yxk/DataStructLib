@@ -152,7 +152,8 @@ public:
 int main() {
 
     try {
-        Test::RangeArrayTest();
+//        Test::RangeArrayTest();
+        Test::DualLinkQueueTest();
 //        Test::BTreeTest();
 //        Test::MatrixGraphTest();
 //        Test::ListGraphTest();

@@ -67,6 +67,10 @@ namespace DataStLib {
             return *this;
         }
 
+        ~DynamicArray() {    //时间复杂度O(1)
+            delete[] this->m_array;
+        }
+
         int length() const {      //时间复杂度O(1)
             return m_length;
         }
@@ -80,10 +84,6 @@ namespace DataStLib {
             if (m_length != length) {
                 update(copy(this->m_array, m_length, length), length);
             }
-        }
-
-        ~DynamicArray() {    //时间复杂度O(1)
-            delete[] this->m_array;
         }
     };
 }

@@ -171,7 +171,7 @@ namespace DataStLib {
 
         void preOrderTraversal(BTreeNode<T> *node, LinkQueue<BTreeNode<T> *> &queue) {//先序遍历
             if (node != NULL) {
-                queue.add(node);
+                queue.add_back(node);
                 preOrderTraversal(node->left, queue);
                 preOrderTraversal(node->right, queue);
             }
@@ -180,7 +180,7 @@ namespace DataStLib {
         void inOrderTraversal(BTreeNode<T> *node, LinkQueue<BTreeNode<T> *> &queue) { //中序遍历
             if (node != NULL) {
                 inOrderTraversal(node->left, queue);
-                queue.add(node);
+                queue.add_back(node);
                 inOrderTraversal(node->right, queue);
             }
         }
@@ -189,7 +189,7 @@ namespace DataStLib {
             if (node != NULL) {
                 postOrderTraversal(node->left, queue);
                 postOrderTraversal(node->right, queue);
-                queue.add(node);
+                queue.add_back(node);
             }
         }
 
@@ -197,21 +197,21 @@ namespace DataStLib {
             if (node != NULL) {
                 LinkQueue<BTreeNode<T> *> tmp;
 
-                tmp.add(node);
+                tmp.add_back(node);
 
                 while (tmp.length() > 0) {
                     BTreeNode<T> *n = tmp.front();
 
                     if (n->left != NULL) {
-                        tmp.add(n->left);
+                        tmp.add_back(n->left);
                     }
                     if (n->right != NULL) {
-                        tmp.add(n->right);
+                        tmp.add_back(n->right);
                     }
 
-                    tmp.remove();
+                    tmp.remove_front();
 
-                    queue.add(n);
+                    queue.add_back(n);
                 }
             }
         }
@@ -306,14 +306,14 @@ namespace DataStLib {
             if (queue.length() > 0) {
                 ret = queue.front();
                 BTreeNode<T> *slider = queue.front();
-                queue.remove();
+                queue.remove_front();
                 slider->left = NULL; //链表头节点左指针为NULL
 
                 while (queue.length() > 0) {
                     slider->right = queue.front();
                     queue.front()->left = slider;
                     slider = queue.front();
-                    queue.remove();
+                    queue.remove_front();
                 }
                 slider->right = NULL;
             }
@@ -431,7 +431,7 @@ namespace DataStLib {
 
             if (ret) {
                 m_queue.clear(); //先清空，防止上一次的遍历残留
-                m_queue.add(root());
+                m_queue.add_back(root());
             }
             return ret;
         }
@@ -446,13 +446,13 @@ namespace DataStLib {
             if (ret) {
                 BTreeNode<T> *node = m_queue.front(); //指向队列的首节点
 
-                m_queue.remove(); //将首节点删除,移动了游标
+                m_queue.remove_front(); //将首节点删除,移动了游标
 
                 if (node->left != NULL) {
-                    m_queue.add(node->left);
+                    m_queue.add_back(node->left);
                 }
                 if (node->right != NULL) {
-                    m_queue.add(node->right);
+                    m_queue.add_back(node->right);
                 }
             }
             return ret;
@@ -477,7 +477,7 @@ namespace DataStLib {
             if (ret != NULL) {
                 for (int i = 0; i < ret->length(); i++) {
                     ret->set(i, queue.front()->value);
-                    queue.remove();
+                    queue.remove_front();
                 }
             } else {
                 THROW_EXCEPTION(NoEnoughMemoryException, "NoEnough memory to create DynamicArray...");

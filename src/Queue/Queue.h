@@ -11,9 +11,9 @@ namespace DataStLib {
     template<typename T>
     class Queue : public Object {
     public:
-        virtual void add(const T &e) = 0;
+        virtual void add_back(const T &e) = 0;
 
-        virtual void remove() = 0;
+        virtual void remove_front() = 0;
 
         virtual T front() const = 0;
 

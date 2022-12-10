@@ -35,6 +35,35 @@ namespace DataStLib {
         cout << endl;
     }
 
+    void Test::DualLinkQueueTest() {
+        DualLinkQueue<int> q;
+
+        q.add_back(0);
+        q.add_back(1);
+        q.add_back(2);
+
+        //0 1 2
+//        while (q.length() > 0){
+//            cout << q.front() << " ";
+//            q.remove_front();
+//        }
+
+        //2 1 0
+//        while (q.length() > 0){
+//            cout << q.back() << " ";
+//            q.remove_back();
+//        }
+
+        q.add_front(-1);
+        q.add_front(-2);
+        q.remove_back();
+        //-2 -1 0 1
+        while (q.length() > 0) {
+            cout << q.front() << " ";
+            q.remove_front();
+        }
+    }
+
     void Test::BTreeTest() {
         /*
                     A

@@ -30,7 +30,7 @@ namespace DataStLib {
             return N;
         }
 
-        void add(const T &e) {    //O(1)
+        void add_back(const T &e) {    //O(1)
             if (m_length < N) {
                 m_space[m_real] = e;
                 m_real = (m_real + 1) % N;
@@ -41,7 +41,7 @@ namespace DataStLib {
 
         }
 
-        void remove() {   //O(1)
+        void remove_front() {   //O(1)
             if (m_length > 0) {
                 m_front = (m_front + 1) % N;
                 m_length--;

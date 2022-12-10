@@ -26,7 +26,7 @@ namespace DataStLib {
             INIT_LIST_HEAD(&m_header);
         }
 
-        void add(const T &e) {       //O(1)
+        void add_back(const T &e) {       //O(1)
             Node *node = new Node();
 
             if (node != NULL) {
@@ -38,7 +38,7 @@ namespace DataStLib {
             }
         }
 
-        void remove() {      //O(1)
+        void remove_front() {      //O(1)
             if (m_length > 0) {
                 list_head *toDel = m_header.next;
 
@@ -62,7 +62,7 @@ namespace DataStLib {
 
         void clear() {    //O(n)
             while (m_length > 0) {
-                remove();
+                remove_front();
             }
         }
 

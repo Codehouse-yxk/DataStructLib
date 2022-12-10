@@ -65,18 +65,18 @@ namespace DataStLib {
                     isVisited.set(j, false);
                 }
 
-                tmp.add(i);
+                tmp.add_back(i);
 
                 while (tmp.length() > 0) {
                     int v = tmp.front();
-                    tmp.remove();
+                    tmp.remove_front();
                     if (!isVisited[v]) {
                         SharedPointer<Array<int>> aj = getAdjacent(v);
                         for (int j = 0; j < aj->length(); j++) {
-                            tmp.add((*aj)[j]);
+                            tmp.add_back((*aj)[j]);
                         }
 
-                        result.add(v);
+                        result.add_back(v);
                         isVisited[v] = true;
                     }
                 }
@@ -110,7 +110,7 @@ namespace DataStLib {
                             tmp.push((*aj)[j]);
                         }
 
-                        result.add(v);
+                        result.add_back(v);
                         isVisited[v] = true;
                     }
                 }
@@ -135,7 +135,6 @@ namespace DataStLib {
 
             return queue2Array(result);
         }
-
     protected:
         template<class T>
         DynamicArray <T> *queue2Array(LinkQueue <T> &queue) {
@@ -143,7 +142,7 @@ namespace DataStLib {
             if (ret != NULL) {
                 for (int i = 0; i < ret->length(); i++) {
                     ret->set(i, queue.front());
-                    queue.remove();
+                    queue.remove_front();
                 }
             } else {
                 THROW_EXCEPTION(NoEnoughMemoryException, "No enough mem to new array...");
@@ -153,7 +152,7 @@ namespace DataStLib {
 
         void DFSByRecursive(int i, DynamicArray<bool> &isVisited, LinkQueue<int> &result) {
             if ((0 <= i) && (i < vCount())) {
-                result.add(i);
+                result.add_back(i);
                 isVisited[i] = true;
 
                 SharedPointer<Array<int>> aj = getAdjacent(i);

@@ -32,12 +32,16 @@
 #include "MatrixGraph.h"
 #include "ListGraph.h"
 #include "RangeArray.h"
+#include "DualLinkQueue.h"
 
 namespace DataStLib {
     class Test {
     public:
         /*******************数组-测试*****************/
         static void RangeArrayTest();
+
+        /*******************双端队列-测试*****************/
+        static void DualLinkQueueTest();
 
         /*******************树-测试*****************/
         static void BTreeTest();
